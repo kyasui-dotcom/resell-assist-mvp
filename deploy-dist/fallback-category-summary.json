@@ -1,0 +1,189 @@
+{
+  "source": "static-fallback",
+  "totalCategories": 5,
+  "totalProducts": 22,
+  "categories": [
+    {
+      "category": "スマホ",
+      "count": 4,
+      "topItems": [
+        {
+          "id": "iphone13-128",
+          "name": "iPhone 13 128GB SIMフリー",
+          "category": "スマホ",
+          "series": "iPhone 13",
+          "specBadges": [],
+          "summary_specs": "128GB / SIMフリー / iPhone 13 / ミッドナイト"
+        },
+        {
+          "id": "iphone13-256",
+          "name": "iPhone 13 256GB SIMフリー",
+          "category": "スマホ",
+          "series": "iPhone 13",
+          "specBadges": [],
+          "summary_specs": "256GB / SIMフリー / iPhone 13 / スターライト"
+        },
+        {
+          "id": "iphone13mini-128",
+          "name": "iPhone 13 mini 128GB SIMフリー",
+          "category": "スマホ",
+          "series": "iPhone 13 mini",
+          "specBadges": [],
+          "summary_specs": "128GB / SIMフリー / iPhone 13 mini / 5.4インチ"
+        },
+        {
+          "id": "iphone14-128",
+          "name": "iPhone 14 128GB SIMフリー",
+          "category": "スマホ",
+          "series": "iPhone 14",
+          "specBadges": [],
+          "summary_specs": "128GB / SIMフリー / iPhone 14 / ミッドナイト"
+        }
+      ]
+    },
+    {
+      "category": "イヤホン",
+      "count": 3,
+      "topItems": [
+        {
+          "id": "airpods4-anc",
+          "name": "AirPods 4 アクティブノイズキャンセリング搭載",
+          "category": "イヤホン",
+          "series": "AirPods 4 ANC",
+          "specBadges": [],
+          "summary_specs": "第4世代 / USB-C / ANC搭載"
+        },
+        {
+          "id": "airpodspro2-lightning",
+          "name": "AirPods Pro 第2世代 Lightningケース",
+          "category": "イヤホン",
+          "series": "AirPods Pro 第2世代",
+          "specBadges": [],
+          "summary_specs": "第2世代 / Lightning / MagSafe充電ケース"
+        },
+        {
+          "id": "airpodspro2-usbc",
+          "name": "AirPods Pro 第2世代 USB-Cケース",
+          "category": "イヤホン",
+          "series": "AirPods Pro 第2世代",
+          "specBadges": [],
+          "summary_specs": "第2世代 / USB-C / MagSafe充電ケース"
+        }
+      ]
+    },
+    {
+      "category": "ゲーム",
+      "count": 6,
+      "topItems": [
+        {
+          "id": "switch-lite-yellow",
+          "name": "Nintendo Switch Lite イエロー",
+          "category": "ゲーム",
+          "series": "Nintendo Switch Lite",
+          "specBadges": [],
+          "summary_specs": "Lite / イエロー / HDH-S-YAZAA"
+        },
+        {
+          "id": "switch-oled-neon",
+          "name": "Nintendo Switch 有機ELモデル ネオン",
+          "category": "ゲーム",
+          "series": "Nintendo Switch 有機ELモデル",
+          "specBadges": [],
+          "summary_specs": "有機EL / ネオン / HEG-S-KABAA"
+        },
+        {
+          "id": "switch-oled-white",
+          "name": "Nintendo Switch 有機ELモデル ホワイト",
+          "category": "ゲーム",
+          "series": "Nintendo Switch 有機ELモデル",
+          "specBadges": [],
+          "summary_specs": "有機EL / ホワイト / HEG-S-KAAAA"
+        },
+        {
+          "id": "ps5-slim-standard",
+          "name": "PlayStation 5 Slim CFI-2000A",
+          "category": "ゲーム",
+          "series": "PlayStation 5 Slim",
+          "specBadges": [],
+          "summary_specs": "Slim / ディスクドライブ搭載 / CFI-2000A"
+        }
+      ]
+    },
+    {
+      "category": "タブレット",
+      "count": 5,
+      "topItems": [
+        {
+          "id": "ipad-air5-256-cellular",
+          "name": "iPad Air 第5世代 256GB Cellular",
+          "category": "タブレット",
+          "series": "iPad Air 第5世代",
+          "specBadges": [],
+          "summary_specs": "第5世代 / 256GB / Cellular / M1"
+        },
+        {
+          "id": "ipad-air5-256-wifi",
+          "name": "iPad Air 第5世代 256GB Wi‑Fi",
+          "category": "タブレット",
+          "series": "iPad Air 第5世代",
+          "specBadges": [],
+          "summary_specs": "第5世代 / 256GB / Wi‑Fi / M1"
+        },
+        {
+          "id": "ipad-air5-64-cellular",
+          "name": "iPad Air 第5世代 64GB Cellular",
+          "category": "タブレット",
+          "series": "iPad Air 第5世代",
+          "specBadges": [],
+          "summary_specs": "第5世代 / 64GB / Cellular / M1"
+        },
+        {
+          "id": "ipad-air5-64-wifi",
+          "name": "iPad Air 第5世代 64GB Wi‑Fi",
+          "category": "タブレット",
+          "series": "iPad Air 第5世代",
+          "specBadges": [],
+          "summary_specs": "第5世代 / 64GB / Wi‑Fi / M1"
+        }
+      ]
+    },
+    {
+      "category": "スマートウォッチ",
+      "count": 4,
+      "topItems": [
+        {
+          "id": "apple-watch-se2-40-gps",
+          "name": "Apple Watch SE 第2世代 40mm GPS",
+          "category": "スマートウォッチ",
+          "series": "Apple Watch SE 第2世代",
+          "specBadges": [],
+          "summary_specs": "第2世代 / 40mm / GPS"
+        },
+        {
+          "id": "apple-watch-se2-44-cellular",
+          "name": "Apple Watch SE 第2世代 44mm Cellular",
+          "category": "スマートウォッチ",
+          "series": "Apple Watch SE 第2世代",
+          "specBadges": [],
+          "summary_specs": "第2世代 / 44mm / Cellular"
+        },
+        {
+          "id": "apple-watch-se2-44-gps",
+          "name": "Apple Watch SE 第2世代 44mm GPS",
+          "category": "スマートウォッチ",
+          "series": "Apple Watch SE 第2世代",
+          "specBadges": [],
+          "summary_specs": "第2世代 / 44mm / GPS"
+        },
+        {
+          "id": "apple-watch-s9-45-gps",
+          "name": "Apple Watch Series 9 45mm GPS",
+          "category": "スマートウォッチ",
+          "series": "Apple Watch Series 9",
+          "specBadges": [],
+          "summary_specs": "Series 9 / 45mm / GPS"
+        }
+      ]
+    }
+  ]
+}

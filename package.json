@@ -8,7 +8,18 @@
     "serve": "python3 -m http.server 4173",
     "test": "node tests/run-tests.js && node tests/snapshot-tests.js && node tests/yahoo-source-tests.js",
     "snapshot": "node scripts/generate-snapshot.js",
-    "pages": "node scripts/generate-product-pages.js"
+    "history": "node scripts/update-history.js",
+    "pages": "node scripts/generate-product-pages.js",
+    "categories": "node scripts/generate-category-pages.js",
+    "articles": "node scripts/generate-article-pages.js",
+    "articles:lite": "ARTICLE_CATEGORY_FILTER='スマホ' ARTICLE_PRODUCT_LIMIT=200 node scripts/generate-article-pages.js",
+    "sitemaps": "node scripts/generate-sitemaps.js",
+    "seo:build": "npm run categories && npm run articles:lite && npm run sitemaps",
+    "refresh": "npm run snapshot && npm run history && npm run seo:build",
+    "d1:prepare-import": "node scripts/prepare-d1-import.js",
+    "d1:prepare-import:mvp": "D1_INCLUDE_CATEGORIES='スマホ,ゲーム,イヤホン,タブレット,スマートウォッチ' node scripts/prepare-d1-import.js",
+    "d1:import-batch": "bash scripts/run-d1-import-batch.sh",
+    "build:deploy": "node scripts/build-deploy-dist.js"
   },
   "type": "module"
 }

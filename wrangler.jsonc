@@ -1,0 +1,39 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "resell-assist-mvp",
+  "main": "worker.js",
+  "compatibility_date": "2026-03-17",
+  "assets": {
+    "directory": "./deploy-dist"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "SEARCH_CACHE",
+      "id": "be6344b240124756baf11c359e7b96b2"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "kaitorihikaku_db",
+      "database_name": "kaitorihikaku-db",
+      "database_id": "e96b8e8c-1171-4c45-a5b9-a73dc3b3b0ba"
+    }
+  ],
+  "workers_dev": true,
+  "preview_urls": true,
+  "routes": [
+    {
+      "pattern": "kaitorihikaku.net",
+      "zone_name": "kaitorihikaku.net",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.kaitorihikaku.net",
+      "zone_name": "kaitorihikaku.net",
+      "custom_domain": true
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
