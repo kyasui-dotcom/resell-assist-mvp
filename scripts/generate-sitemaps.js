@@ -1,7 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const root = path.resolve('/home/kyforever/.openclaw/workspace/resell-assist-mvp');
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const productsPath = path.join(root, 'data/products.json');
 const articleManifestPath = path.join(root, 'data/article-manifest.json');
 const sitemapDir = path.join(root, 'sitemaps');
@@ -42,6 +43,15 @@ function wrapSitemapIndex(files) {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${files.map((file) => `  <sitemap><loc>${siteUrl}/sitemaps/${file}</loc></sitemap>`).join('\n')}\n</sitemapindex>\n`;
 }
 
+function stripHtmlExt(url) {
+  if (!url) return url;
+  return url.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
+}
+
+function uniqueUrls(urls) {
+  return [...new Set(urls.filter(Boolean))];
+}
+
 async function main() {
   const products = JSON.parse(await fs.readFile(productsPath, 'utf8'));
   const articleManifest = JSON.parse(await fs.readFile(articleManifestPath, 'utf8').catch(() => '{"articles":[]}'));
@@ -49,18 +59,36 @@ async function main() {
   await fs.rm(sitemapDir, { recursive: true, force: true });
   await fs.mkdir(sitemapDir, { recursive: true });
 
-  const categoryUrls = [
+  const categoryUrls = uniqueUrls([
     `${siteUrl}/`,
-    ...Object.values(CATEGORY_SLUG).map((slug) => `${siteUrl}/categories/${slug}.html`),
-    `${siteUrl}/articles/index.html`
-  ];
+    ...Object.values(CATEGORY_SLUG).map((slug) => `${siteUrl}/categories/${slug}`),
+    `${siteUrl}/articles/`
+  ]);
 
-  const articleUrls = (articleManifest.articles ?? []).map((article) => article.canonical).filter(Boolean);
+  const articleUrls = uniqueUrls(
+    (articleManifest.articles ?? [])
+      .map((article) => stripHtmlExt(article.canonical))
+      .filter(Boolean)
+  );
+
+  const productUrls = uniqueUrls(
+    (Array.isArray(products) ? products : [])
+      .map((product) => product?.id)
+      .filter(Boolean)
+      .map((id) => `${siteUrl}/products/${encodeURIComponent(id)}.html`)
+  );
 
   const files = [];
 
   await fs.writeFile(path.join(sitemapDir, 'core.xml'), wrapUrlSet(categoryUrls), 'utf8');
   files.push('core.xml');
+
+  const productChunks = chunk(productUrls, maxUrlsPerFile);
+  for (let i = 0; i < productChunks.length; i += 1) {
+    const filename = `products-${String(i + 1).padStart(3, '0')}.xml`;
+    await fs.writeFile(path.join(sitemapDir, filename), wrapUrlSet(productChunks[i]), 'utf8');
+    files.push(filename);
+  }
 
   const articleChunks = chunk(articleUrls, maxUrlsPerFile);
   for (let i = 0; i < articleChunks.length; i += 1) {
@@ -74,7 +102,7 @@ async function main() {
   console.log(JSON.stringify({
     sitemapIndex: 'sitemap.xml',
     files,
-    productCount: 0,
+    productCount: productUrls.length,
     articleCount: articleUrls.length,
     categoryCount: categoryUrls.length
   }, null, 2));

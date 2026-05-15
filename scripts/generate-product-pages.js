@@ -1,7 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const root = path.resolve('/home/kyforever/.openclaw/workspace/resell-assist-mvp');
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dataPath = path.join(root, 'data/products.json');
 const snapshotsPath = path.join(root, 'output/price-snapshots.json');
 const historyPath = path.join(root, 'output/price-history.json');
@@ -349,13 +350,15 @@ async function main() {
     'game',
     'tablet',
     'watch'
-  ].map((slug) => `  <url><loc>https://kaitorihikaku.net/categories/${slug}.html</loc></url>`).join('\n');
+  ].map((slug) => `  <url><loc>https://kaitorihikaku.net/categories/${slug}</loc></url>`).join('\n');
 
-  let articleEntries = '  <url><loc>https://kaitorihikaku.net/articles/index.html</loc></url>';
+  const stripHtmlExt = (url) => url ? url.replace(/\/index\.html$/, '/').replace(/\.html$/, '') : url;
+
+  let articleEntries = '  <url><loc>https://kaitorihikaku.net/articles/</loc></url>';
   try {
     const articleManifest = JSON.parse(await fs.readFile(articleManifestPath, 'utf8'));
-    const urls = (articleManifest.articles ?? []).map((article) => `  <url><loc>${article.canonical}</loc></url>`);
-    articleEntries = ['  <url><loc>https://kaitorihikaku.net/articles/index.html</loc></url>', ...urls].join('\n');
+    const urls = (articleManifest.articles ?? []).map((article) => `  <url><loc>${stripHtmlExt(article.canonical)}</loc></url>`);
+    articleEntries = ['  <url><loc>https://kaitorihikaku.net/articles/</loc></url>', ...urls].join('\n');
   } catch {
   }
 

@@ -1,7 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const root = path.resolve('/home/kyforever/.openclaw/workspace/resell-assist-mvp');
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dataPath = path.join(root, 'data/products.json');
 const snapshotsPath = path.join(root, 'output/price-snapshots.json');
 const historyPath = path.join(root, 'output/price-history.json');
@@ -10,7 +11,7 @@ const manifestPath = path.join(root, 'data/article-manifest.json');
 
 const SITE_NAME = '買取比較.net';
 const SITE_URL = 'https://kaitorihikaku.net';
-const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.svg`;
+const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 const DEFAULT_OG_IMAGE_ALT = `${SITE_NAME}の買取価格比較イメージ`;
 
 const yen = (value) => (Number.isFinite(value) ? `¥${Math.round(value).toLocaleString('ja-JP')}` : '相場確認中');
@@ -330,7 +331,7 @@ function buildArticle(product, rawSnapshot, intent, products, snapshotMap, histo
   const slug = makeSlug(product, intent);
   const title = `${product.name}${intent.suffix}`;
   const description = buildArticleDescription(product, suggested, intent);
-  const canonical = `${SITE_URL}/articles/${slug}.html`;
+  const canonical = `${SITE_URL}/articles/${slug}`;
   const modifiedAt = new Date().toISOString();
   const markets = buildMarkets(product, snapshot);
   const variants = buildVariantRows(product, products, snapshotMap);
@@ -353,8 +354,8 @@ function buildArticle(product, rawSnapshot, intent, products, snapshotMap, histo
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: '買取比較.net', item: `${SITE_URL}/` },
-      { '@type': 'ListItem', position: 2, name: '売却ガイド記事一覧', item: `${SITE_URL}/articles/index.html` },
-      { '@type': 'ListItem', position: 3, name: categoryMeta.label, item: `${SITE_URL}/categories/${categoryMeta.slug}.html` },
+      { '@type': 'ListItem', position: 2, name: '売却ガイド記事一覧', item: `${SITE_URL}/articles/` },
+      { '@type': 'ListItem', position: 3, name: categoryMeta.label, item: `${SITE_URL}/categories/${categoryMeta.slug}` },
       { '@type': 'ListItem', position: 4, name: title, item: canonical }
     ]
   };
@@ -532,7 +533,7 @@ function buildHubPage(articles) {
 
   const hubTitle = `売却ガイド記事一覧 | ${SITE_NAME}`;
   const hubDescription = '中古売却・買取比較に関する静的記事一覧。商品別の相場、売り時、付属品、状態別の考え方をまとめています。';
-  const hubCanonical = `${SITE_URL}/articles/index.html`;
+  const hubCanonical = `${SITE_URL}/articles/`;
   const collectionStructuredData = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -547,7 +548,7 @@ function buildHubPage(articles) {
     hasPart: articles.slice(0, 24).map((article) => ({
       '@type': 'Article',
       headline: article.title,
-      url: `${SITE_URL}/articles/${article.slug}.html`
+      url: `${SITE_URL}/articles/${article.slug}`
     }))
   });
   const breadcrumbStructuredData = JSON.stringify({

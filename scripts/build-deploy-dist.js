@@ -11,6 +11,7 @@ const STATIC_FILES = [
   'worker.js',
   'robots.txt',
   'og-image.svg',
+  'og-image.png',
   'google586bfb8e8307adb8.html'
 ];
 

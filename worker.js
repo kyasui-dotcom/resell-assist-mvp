@@ -47,7 +47,7 @@ function escapeHtml(value = '') {
 }
 
 function categoryHref(category) {
-  return `/categories/${CATEGORY_SLUGS[category] || encodeURIComponent(category)}.html`;
+  return `/categories/${CATEGORY_SLUGS[category] || encodeURIComponent(category)}`;
 }
 
 function buildCandidatePriceLabel(product) {

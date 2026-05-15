@@ -1,7 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const root = path.resolve('/home/kyforever/.openclaw/workspace/resell-assist-mvp');
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dataPath = path.join(root, 'data/products.json');
 const snapshotsPath = path.join(root, 'output/price-snapshots.json');
 const articleManifestPath = path.join(root, 'data/article-manifest.json');
@@ -9,7 +10,7 @@ const outDir = path.join(root, 'categories');
 
 const SITE_NAME = '買取比較.net';
 const SITE_URL = 'https://kaitorihikaku.net';
-const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.svg`;
+const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 const DEFAULT_OG_IMAGE_ALT = `${SITE_NAME}の買取価格比較イメージ`;
 const PAGE_SIZE = 120;
 const MAX_STANDARD_ITEMS = Number(process.env.MAX_STANDARD_ITEMS || 120);
@@ -72,7 +73,7 @@ function buildStandardCategoryPage(category, items, articles) {
   const sorted = items.slice().sort((a, b) => (b.standard ?? 0) - (a.standard ?? 0));
   const cards = sorted.slice(0, MAX_STANDARD_ITEMS).map(productCard).join('');
   const articleCards = articles.slice(0, 12).map((article) => `<a class="articleCard" href="../articles/${article.slug}.html"><strong>${escapeHtml(article.title)}</strong><p class="sub">${escapeHtml(article.intentLabel)} / ${escapeHtml(article.productName)}</p></a>`).join('') || '<p class="sub">関連記事を準備中です。</p>';
-  const canonical = `${SITE_URL}/categories/${meta.slug}.html`;
+  const canonical = `${SITE_URL}/categories/${meta.slug}`;
   const description = `${meta.lead} 人気モデルの標準相場、すぐ売る価格、おすすめ販路をまとめて確認できます。`;
   const structuredData = [
     {
@@ -122,7 +123,7 @@ function buildStandardCategoryPage(category, items, articles) {
 
 function buildComputerHubPage(items) {
   const groups = COMPUTER_GROUPS.map((group) => ({ ...group, items: items.filter(group.test) })).filter((g) => g.items.length);
-  const canonical = `${SITE_URL}/categories/computer.html`;
+  const canonical = `${SITE_URL}/categories/computer`;
   const description = 'MacBook、Surface、ThinkPadなどパソコン系モデルをシリーズ別に分割して比較できます。';
   const body = `<section class="card stack"><div class="sectionHead"><div><p class="eyebrow">PC categories</p><h2 class="sectionTitle">シリーズ別に分割して掲載</h2></div><p class="sub small">巨大ページを避けて見やすくしました</p></div><div class="gridAuto">${groups.map((g) => `<a class="productCard" href="./${g.slug}.html"><div class="productTop"><strong>${escapeHtml(g.label)}</strong><span class="price">${g.items.length.toLocaleString('ja-JP')}件</span></div><p class="sub">代表シリーズごとに相場比較をまとめています。</p></a>`).join('')}</div></section>`;
   return pageShell({
@@ -166,7 +167,7 @@ function buildComputerGroupPage(group, items) {
   return pages.map((pageItems, index) => {
     const pageNo = index + 1;
     const slug = pageNo === 1 ? group.slug : `${group.slug}-${pageNo}`;
-    const canonical = `${SITE_URL}/categories/${slug}.html`;
+    const canonical = `${SITE_URL}/categories/${slug}`;
     const pagination = pages.length > 1 ? `<div class="linkRow">${pages.map((_, i) => {
       const target = i === 0 ? `${group.slug}.html` : `${group.slug}-${i + 1}.html`;
       const klass = i === index ? 'button' : 'button secondary';
@@ -198,7 +199,7 @@ function buildComputerGroupPage(group, items) {
             '@type': 'BreadcrumbList',
             itemListElement: [
               { '@type': 'ListItem', position: 1, name: 'トップ', item: `${SITE_URL}/` },
-              { '@type': 'ListItem', position: 2, name: 'パソコン買取価格比較', item: `${SITE_URL}/categories/computer.html` },
+              { '@type': 'ListItem', position: 2, name: 'パソコン買取価格比較', item: `${SITE_URL}/categories/computer` },
               { '@type': 'ListItem', position: 3, name: `${group.label} 買取価格比較`, item: canonical }
             ]
           },

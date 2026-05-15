@@ -21,5 +21,8 @@
     "d1:import-batch": "bash scripts/run-d1-import-batch.sh",
     "build:deploy": "node scripts/build-deploy-dist.js"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
 }
