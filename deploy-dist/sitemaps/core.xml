@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://kaitorihikaku.net/</loc></url>
-  <url><loc>https://kaitorihikaku.net/categories/smartphone.html</loc></url>
-  <url><loc>https://kaitorihikaku.net/categories/earphone.html</loc></url>
-  <url><loc>https://kaitorihikaku.net/categories/game.html</loc></url>
-  <url><loc>https://kaitorihikaku.net/categories/tablet.html</loc></url>
-  <url><loc>https://kaitorihikaku.net/categories/watch.html</loc></url>
-  <url><loc>https://kaitorihikaku.net/categories/computer.html</loc></url>
-  <url><loc>https://kaitorihikaku.net/articles/index.html</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/smartphone</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/earphone</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/game</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/tablet</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/watch</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/computer</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/tablet-accessory</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/vr</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/camera</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/audio</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/home-appliance</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/beauty</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/camera-accessory</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/smart-home</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/wearable</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/small-electronics</loc></url>
+  <url><loc>https://kaitorihikaku.net/categories/healthcare</loc></url>
+  <url><loc>https://kaitorihikaku.net/articles/</loc></url>
 </urlset>
