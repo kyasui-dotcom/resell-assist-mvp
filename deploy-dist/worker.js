@@ -406,6 +406,19 @@ export default {
       }
     }
 
+    // HTML拡張子の 301 正規化 (Cloudflare Assets の default 307 を 301 に上書き)
+    // 対象: /articles/foo.html, /categories/foo.html, /articles/index.html, /index.html など
+    // 除外: /products/foo.html (worker.js が上で動的レンダリング 200 を返す)
+    if (url.pathname.endsWith('.html') && !url.pathname.startsWith('/products/')) {
+      const normalized = url.pathname.endsWith('/index.html')
+        ? url.pathname.slice(0, -'index.html'.length)
+        : url.pathname.slice(0, -'.html'.length);
+      return new Response(null, {
+        status: 301,
+        headers: { Location: normalized + url.search, 'Cache-Control': 'public, max-age=86400' }
+      });
+    }
+
     return env.ASSETS.fetch(request);
   }
 };
