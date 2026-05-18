@@ -650,18 +650,42 @@ async function main() {
     p.specs?.model ?? ''
   ].join('|');
 
+  // 代表は「explicit articleCanonicalProductId を持たない (= 自分が canonical) 製品」優先で選ぶ
+  // これにより products.json のソート順で variants が先頭に来てもバグらない
   const groupRepresentative = new Map();
+  const isExplicitlyCanonical = (p) => !p.articleCanonicalProductId || p.articleCanonicalProductId === p.id;
+  for (const product of filteredProducts) {
+    if (!isExplicitlyCanonical(product)) continue;
+    const key = groupKey(product);
+    if (!groupRepresentative.has(key)) groupRepresentative.set(key, product.id);
+  }
+  // fallback: 上で代表が決まらなかった群 (全員が canonical pointer を持っている異常ケース) は最初の製品を代表に
   for (const product of filteredProducts) {
     const key = groupKey(product);
     if (!groupRepresentative.has(key)) groupRepresentative.set(key, product.id);
   }
 
+  const productMap = new Map(filteredProducts.map((p) => [p.id, p]));
+
+  // チェーンを辿って最終 canonical 製品ID を返す (循環防止)
   const resolveCanonicalProductId = (product) => {
-    if (product.articleCanonicalProductId && product.articleCanonicalProductId !== product.id) {
-      return product.articleCanonicalProductId;
+    const visited = new Set([product.id]);
+    let current = product;
+    while (true) {
+      let nextId = null;
+      if (current.articleCanonicalProductId && current.articleCanonicalProductId !== current.id) {
+        nextId = current.articleCanonicalProductId;
+      } else {
+        const rep = groupRepresentative.get(groupKey(current));
+        if (rep && rep !== current.id) nextId = rep;
+      }
+      if (!nextId || visited.has(nextId)) break;
+      visited.add(nextId);
+      const next = productMap.get(nextId);
+      if (!next) break;
+      current = next;
     }
-    const rep = groupRepresentative.get(groupKey(product));
-    return rep && rep !== product.id ? rep : null;
+    return current.id === product.id ? null : current.id;
   };
 
   const productsForArticles = filteredProducts.filter((product) => !resolveCanonicalProductId(product));
@@ -669,7 +693,6 @@ async function main() {
   const skippedCount = filteredProducts.length - productsForArticles.length;
 
   // 旧URL → 代表URL の301リダイレクトマップを作成（worker.js が読む）
-  const productMap = new Map(filteredProducts.map((p) => [p.id, p]));
   const articleRedirects = {};
   for (const product of filteredProducts) {
     const repId = resolveCanonicalProductId(product);
