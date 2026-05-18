@@ -1,50 +1,66 @@
 {
   "source": "static-fallback",
-  "totalCategories": 5,
-  "totalProducts": 22,
+  "totalCategories": 17,
+  "totalProducts": 8014,
   "categories": [
     {
-      "category": "スマホ",
-      "count": 4,
+      "category": "VR",
+      "count": 12,
       "topItems": [
         {
-          "id": "iphone13-128",
-          "name": "iPhone 13 128GB SIMフリー",
-          "category": "スマホ",
-          "series": "iPhone 13",
+          "id": "meta-quest2-128",
+          "name": "Meta Quest 2 128GB",
+          "category": "VR",
+          "series": "Meta Quest 2",
           "specBadges": [],
-          "summary_specs": "128GB / SIMフリー / iPhone 13 / ミッドナイト"
+          "summary_specs": "Meta Quest 2 / ホワイト / Meta / 128GB"
         },
         {
-          "id": "iphone13-256",
-          "name": "iPhone 13 256GB SIMフリー",
-          "category": "スマホ",
-          "series": "iPhone 13",
+          "id": "meta-quest2-256",
+          "name": "Meta Quest 2 256GB",
+          "category": "VR",
+          "series": "Meta Quest 2",
           "specBadges": [],
-          "summary_specs": "256GB / SIMフリー / iPhone 13 / スターライト"
+          "summary_specs": "Meta Quest 2 / ホワイト / Meta / 256GB"
         },
         {
-          "id": "iphone13mini-128",
-          "name": "iPhone 13 mini 128GB SIMフリー",
-          "category": "スマホ",
-          "series": "iPhone 13 mini",
+          "id": "meta-quest3-128",
+          "name": "Meta Quest 3 128GB",
+          "category": "VR",
+          "series": "Meta Quest 3",
           "specBadges": [],
-          "summary_specs": "128GB / SIMフリー / iPhone 13 mini / 5.4インチ"
+          "summary_specs": "Meta Quest 3 / ホワイト / Meta / 128GB"
         },
         {
-          "id": "iphone14-128",
-          "name": "iPhone 14 128GB SIMフリー",
-          "category": "スマホ",
-          "series": "iPhone 14",
+          "id": "meta-quest3-512",
+          "name": "Meta Quest 3 512GB",
+          "category": "VR",
+          "series": "Meta Quest 3",
           "specBadges": [],
-          "summary_specs": "128GB / SIMフリー / iPhone 14 / ミッドナイト"
+          "summary_specs": "Meta Quest 3 / ホワイト / Meta / 512GB"
         }
       ]
     },
     {
       "category": "イヤホン",
-      "count": 3,
+      "count": 24,
       "topItems": [
+        {
+          "id": "airpods4-open",
+          "name": "AirPods 4",
+          "category": "イヤホン",
+          "series": "AirPods 4",
+          "specBadges": [],
+          "summary_specs": "AirPods 4 / USB-C / 充電ケース付き"
+        },
+        {
+          "id": "airpods4-anc-usbc",
+          "name": "AirPods 4 ANC USB-Cケース",
+          "category": "イヤホン",
+          "series": "AirPods 4 ANC",
+          "specBadges": [],
+          "summary_specs": "AirPods 4 ANC / USB-C / 充電ケース付き"
+        },
         {
           "id": "airpods4-anc",
           "name": "AirPods 4 アクティブノイズキャンセリング搭載",
@@ -54,103 +70,217 @@
           "summary_specs": "第4世代 / USB-C / ANC搭載"
         },
         {
-          "id": "airpodspro2-lightning",
-          "name": "AirPods Pro 第2世代 Lightningケース",
+          "id": "airpods-max-lightning",
+          "name": "AirPods Max Lightning",
           "category": "イヤホン",
-          "series": "AirPods Pro 第2世代",
+          "series": "AirPods Max",
           "specBadges": [],
-          "summary_specs": "第2世代 / Lightning / MagSafe充電ケース"
+          "summary_specs": "AirPods Max / Lightning / ヘッドホン"
+        }
+      ]
+    },
+    {
+      "category": "ウェアラブル",
+      "count": 304,
+      "topItems": [
+        {
+          "id": "fitbit-device-charge6-black-band-set",
+          "name": "Fitbit Charge6 black band-set",
+          "category": "ウェアラブル",
+          "series": "Fitbit",
+          "specBadges": [],
+          "summary_specs": "Fitbit / 40mm / GPS / Charge6 / black / band-set"
         },
         {
-          "id": "airpodspro2-usbc",
-          "name": "AirPods Pro 第2世代 USB-Cケース",
-          "category": "イヤホン",
-          "series": "AirPods Pro 第2世代",
+          "id": "fitbit-device-charge6-black-watch-only",
+          "name": "Fitbit Charge6 black watch-only",
+          "category": "ウェアラブル",
+          "series": "Fitbit",
           "specBadges": [],
-          "summary_specs": "第2世代 / USB-C / MagSafe充電ケース"
+          "summary_specs": "Fitbit / 40mm / GPS / Charge6 / black / watch-only"
+        },
+        {
+          "id": "fitbit-device-charge6-pink-band-set",
+          "name": "Fitbit Charge6 pink band-set",
+          "category": "ウェアラブル",
+          "series": "Fitbit",
+          "specBadges": [],
+          "summary_specs": "Fitbit / 40mm / GPS / Charge6 / pink / band-set"
+        },
+        {
+          "id": "fitbit-device-charge6-pink-watch-only",
+          "name": "Fitbit Charge6 pink watch-only",
+          "category": "ウェアラブル",
+          "series": "Fitbit",
+          "specBadges": [],
+          "summary_specs": "Fitbit / 40mm / GPS / Charge6 / pink / watch-only"
+        }
+      ]
+    },
+    {
+      "category": "オーディオ",
+      "count": 400,
+      "topItems": [
+        {
+          "id": "bose-speaker-portable-smart-black-charger-set",
+          "name": "Bose ポータブルスピーカー Portable-Smart black charger-set",
+          "category": "オーディオ",
+          "series": "Bose ポータブルスピーカー",
+          "specBadges": [],
+          "summary_specs": "Bose ポータブルスピーカー / USB-C / charger-set / Portable-Smart / black"
+        },
+        {
+          "id": "bose-speaker-portable-smart-black-main-unit",
+          "name": "Bose ポータブルスピーカー Portable-Smart black main-unit",
+          "category": "オーディオ",
+          "series": "Bose ポータブルスピーカー",
+          "specBadges": [],
+          "summary_specs": "Bose ポータブルスピーカー / USB-C / main-unit / Portable-Smart / black"
+        },
+        {
+          "id": "bose-speaker-portable-smart-blue-charger-set",
+          "name": "Bose ポータブルスピーカー Portable-Smart blue charger-set",
+          "category": "オーディオ",
+          "series": "Bose ポータブルスピーカー",
+          "specBadges": [],
+          "summary_specs": "Bose ポータブルスピーカー / USB-C / charger-set / Portable-Smart / blue"
+        },
+        {
+          "id": "bose-speaker-portable-smart-blue-main-unit",
+          "name": "Bose ポータブルスピーカー Portable-Smart blue main-unit",
+          "category": "オーディオ",
+          "series": "Bose ポータブルスピーカー",
+          "specBadges": [],
+          "summary_specs": "Bose ポータブルスピーカー / USB-C / main-unit / Portable-Smart / blue"
+        }
+      ]
+    },
+    {
+      "category": "カメラ",
+      "count": 35,
+      "topItems": [
+        {
+          "id": "canon-r6m2-black-24-105-kit",
+          "name": "Canon EOS R6 Mark II black 24-105-kit",
+          "category": "カメラ",
+          "series": "Canon EOS R6 Mark II",
+          "specBadges": [],
+          "summary_specs": "Canon EOS R6 Mark II / black / 24-105-kit"
+        },
+        {
+          "id": "canon-r6m2-black-body",
+          "name": "Canon EOS R6 Mark II black body",
+          "category": "カメラ",
+          "series": "Canon EOS R6 Mark II",
+          "specBadges": [],
+          "summary_specs": "Canon EOS R6 Mark II / black / body"
+        },
+        {
+          "id": "canon-r8-black-24-50-kit",
+          "name": "Canon EOS R8 black 24-50-kit",
+          "category": "カメラ",
+          "series": "Canon EOS R8",
+          "specBadges": [],
+          "summary_specs": "Canon EOS R8 / black / 24-50-kit"
+        },
+        {
+          "id": "canon-r8-black-body",
+          "name": "Canon EOS R8 black body",
+          "category": "カメラ",
+          "series": "Canon EOS R8",
+          "specBadges": [],
+          "summary_specs": "Canon EOS R8 / black / body"
+        }
+      ]
+    },
+    {
+      "category": "カメラアクセサリ",
+      "count": 178,
+      "topItems": [
+        {
+          "id": "canon-rf-lens-100-400-black-hood-set",
+          "name": "Canon RF レンズ 100-400 black hood-set",
+          "category": "カメラアクセサリ",
+          "series": "Canon RF レンズ",
+          "specBadges": [],
+          "summary_specs": "Canon RF レンズ / black / hood-set / 100-400"
+        },
+        {
+          "id": "canon-rf-lens-100-400-black-lens-only",
+          "name": "Canon RF レンズ 100-400 black lens-only",
+          "category": "カメラアクセサリ",
+          "series": "Canon RF レンズ",
+          "specBadges": [],
+          "summary_specs": "Canon RF レンズ / black / lens-only / 100-400"
+        },
+        {
+          "id": "canon-rf-lens-24-105-f4-black-hood-set",
+          "name": "Canon RF レンズ 24-105-f4 black hood-set",
+          "category": "カメラアクセサリ",
+          "series": "Canon RF レンズ",
+          "specBadges": [],
+          "summary_specs": "Canon RF レンズ / black / hood-set / 24-105-f4"
+        },
+        {
+          "id": "canon-rf-lens-24-105-f4-black-lens-only",
+          "name": "Canon RF レンズ 24-105-f4 black lens-only",
+          "category": "カメラアクセサリ",
+          "series": "Canon RF レンズ",
+          "specBadges": [],
+          "summary_specs": "Canon RF レンズ / black / lens-only / 24-105-f4"
         }
       ]
     },
     {
       "category": "ゲーム",
-      "count": 6,
+      "count": 250,
       "topItems": [
         {
-          "id": "switch-lite-yellow",
-          "name": "Nintendo Switch Lite イエロー",
+          "id": "ps5-access-controller",
+          "name": "Access コントローラー CFI-ZAC1J",
           "category": "ゲーム",
-          "series": "Nintendo Switch Lite",
+          "series": "Access コントローラー",
           "specBadges": [],
-          "summary_specs": "Lite / イエロー / HDH-S-YAZAA"
+          "summary_specs": "Access コントローラー / ディスクドライブ搭載 / CFI-ZAC1J"
         },
         {
-          "id": "switch-oled-neon",
-          "name": "Nintendo Switch 有機ELモデル ネオン",
+          "id": "dualsense-edge",
+          "name": "DualSense Edge ワイヤレスコントローラー",
           "category": "ゲーム",
-          "series": "Nintendo Switch 有機ELモデル",
+          "series": "DualSense Edge",
           "specBadges": [],
-          "summary_specs": "有機EL / ネオン / HEG-S-KABAA"
+          "summary_specs": "DualSense Edge / ディスクドライブ搭載 / CFI-ZCP1J"
         },
         {
-          "id": "switch-oled-white",
-          "name": "Nintendo Switch 有機ELモデル ホワイト",
+          "id": "ps5-dualsense-galactic-purple",
+          "name": "DualSense ワイヤレスコントローラー ギャラクティック パープル",
           "category": "ゲーム",
-          "series": "Nintendo Switch 有機ELモデル",
+          "series": "DualSense ワイヤレスコントローラー",
           "specBadges": [],
-          "summary_specs": "有機EL / ホワイト / HEG-S-KAAAA"
+          "summary_specs": "DualSense ワイヤレスコントローラー / ディスクドライブ搭載 / CFI-ZCT1J04"
         },
         {
-          "id": "ps5-slim-standard",
-          "name": "PlayStation 5 Slim CFI-2000A",
+          "id": "ps5-dualsense-cosmic-red",
+          "name": "DualSense ワイヤレスコントローラー コズミック レッド",
           "category": "ゲーム",
-          "series": "PlayStation 5 Slim",
+          "series": "DualSense ワイヤレスコントローラー",
           "specBadges": [],
-          "summary_specs": "Slim / ディスクドライブ搭載 / CFI-2000A"
-        }
-      ]
-    },
-    {
-      "category": "タブレット",
-      "count": 5,
-      "topItems": [
-        {
-          "id": "ipad-air5-256-cellular",
-          "name": "iPad Air 第5世代 256GB Cellular",
-          "category": "タブレット",
-          "series": "iPad Air 第5世代",
-          "specBadges": [],
-          "summary_specs": "第5世代 / 256GB / Cellular / M1"
-        },
-        {
-          "id": "ipad-air5-256-wifi",
-          "name": "iPad Air 第5世代 256GB Wi‑Fi",
-          "category": "タブレット",
-          "series": "iPad Air 第5世代",
-          "specBadges": [],
-          "summary_specs": "第5世代 / 256GB / Wi‑Fi / M1"
-        },
-        {
-          "id": "ipad-air5-64-cellular",
-          "name": "iPad Air 第5世代 64GB Cellular",
-          "category": "タブレット",
-          "series": "iPad Air 第5世代",
-          "specBadges": [],
-          "summary_specs": "第5世代 / 64GB / Cellular / M1"
-        },
-        {
-          "id": "ipad-air5-64-wifi",
-          "name": "iPad Air 第5世代 64GB Wi‑Fi",
-          "category": "タブレット",
-          "series": "iPad Air 第5世代",
-          "specBadges": [],
-          "summary_specs": "第5世代 / 64GB / Wi‑Fi / M1"
+          "summary_specs": "DualSense ワイヤレスコントローラー / ディスクドライブ搭載 / CFI-ZCT1J02"
         }
       ]
     },
     {
       "category": "スマートウォッチ",
-      "count": 4,
+      "count": 18,
       "topItems": [
+        {
+          "id": "apple-watch-se2-40-cellular",
+          "name": "Apple Watch SE 第2世代 40mm Cellular",
+          "category": "スマートウォッチ",
+          "series": "Apple Watch SE 第2世代",
+          "specBadges": [],
+          "summary_specs": "Apple Watch SE 第2世代 / 40mm / Cellular / アルミニウム"
+        },
         {
           "id": "apple-watch-se2-40-gps",
           "name": "Apple Watch SE 第2世代 40mm GPS",
@@ -174,14 +304,348 @@
           "series": "Apple Watch SE 第2世代",
           "specBadges": [],
           "summary_specs": "第2世代 / 44mm / GPS"
+        }
+      ]
+    },
+    {
+      "category": "スマートホーム",
+      "count": 268,
+      "topItems": [
+        {
+          "id": "amazon-echo-dot5-black-standard",
+          "name": "Amazon Echo Dot5 black standard",
+          "category": "スマートホーム",
+          "series": "Amazon Echo",
+          "specBadges": [],
+          "summary_specs": "Amazon Echo / black / standard / Dot5"
         },
         {
-          "id": "apple-watch-s9-45-gps",
-          "name": "Apple Watch Series 9 45mm GPS",
-          "category": "スマートウォッチ",
-          "series": "Apple Watch Series 9",
+          "id": "amazon-echo-dot5-black-with-stand",
+          "name": "Amazon Echo Dot5 black with-stand",
+          "category": "スマートホーム",
+          "series": "Amazon Echo",
           "specBadges": [],
-          "summary_specs": "Series 9 / 45mm / GPS"
+          "summary_specs": "Amazon Echo / black / with-stand / Dot5"
+        },
+        {
+          "id": "amazon-echo-dot5-blue-standard",
+          "name": "Amazon Echo Dot5 blue standard",
+          "category": "スマートホーム",
+          "series": "Amazon Echo",
+          "specBadges": [],
+          "summary_specs": "Amazon Echo / blue / standard / Dot5"
+        },
+        {
+          "id": "amazon-echo-dot5-blue-with-stand",
+          "name": "Amazon Echo Dot5 blue with-stand",
+          "category": "スマートホーム",
+          "series": "Amazon Echo",
+          "specBadges": [],
+          "summary_specs": "Amazon Echo / blue / with-stand / Dot5"
+        }
+      ]
+    },
+    {
+      "category": "スマホ",
+      "count": 362,
+      "topItems": [
+        {
+          "id": "iphone11-128-black",
+          "name": "iPhone 11 128GB black SIMフリー",
+          "category": "スマホ",
+          "series": "iPhone 11",
+          "specBadges": [],
+          "summary_specs": "128GB / SIMフリー / iPhone 11 / black"
+        },
+        {
+          "id": "iphone11-128-green",
+          "name": "iPhone 11 128GB green SIMフリー",
+          "category": "スマホ",
+          "series": "iPhone 11",
+          "specBadges": [],
+          "summary_specs": "128GB / SIMフリー / iPhone 11 / green"
+        },
+        {
+          "id": "iphone11-128-purple",
+          "name": "iPhone 11 128GB purple SIMフリー",
+          "category": "スマホ",
+          "series": "iPhone 11",
+          "specBadges": [],
+          "summary_specs": "128GB / SIMフリー / iPhone 11 / purple"
+        },
+        {
+          "id": "iphone11-128-red",
+          "name": "iPhone 11 128GB red SIMフリー",
+          "category": "スマホ",
+          "series": "iPhone 11",
+          "specBadges": [],
+          "summary_specs": "128GB / SIMフリー / iPhone 11 / red"
+        }
+      ]
+    },
+    {
+      "category": "タブレット",
+      "count": 70,
+      "topItems": [
+        {
+          "id": "ipad-air6-11-128-cellular",
+          "name": "iPad Air 11インチ M2 128GB Cellular",
+          "category": "タブレット",
+          "series": "iPad Air 11インチ M2",
+          "specBadges": [],
+          "summary_specs": "iPad Air 11インチ M2 / 128GB / Cellular / M2"
+        },
+        {
+          "id": "ipad-air6-11-128-wifi",
+          "name": "iPad Air 11インチ M2 128GB Wi‑Fi",
+          "category": "タブレット",
+          "series": "iPad Air 11インチ M2",
+          "specBadges": [],
+          "summary_specs": "iPad Air 11インチ M2 / 128GB / Wi‑Fi / M2"
+        },
+        {
+          "id": "ipad-air6-11-1tb-cellular",
+          "name": "iPad Air 11インチ M2 1TB Cellular",
+          "category": "タブレット",
+          "series": "iPad Air 11インチ M2",
+          "specBadges": [],
+          "summary_specs": "iPad Air 11インチ M2 / 1TB / Cellular / M2"
+        },
+        {
+          "id": "ipad-air6-11-1tb-wifi",
+          "name": "iPad Air 11インチ M2 1TB Wi‑Fi",
+          "category": "タブレット",
+          "series": "iPad Air 11インチ M2",
+          "specBadges": [],
+          "summary_specs": "iPad Air 11インチ M2 / 1TB / Wi‑Fi / M2"
+        }
+      ]
+    },
+    {
+      "category": "タブレットアクセサリ",
+      "count": 17,
+      "topItems": [
+        {
+          "id": "airtag-1pack",
+          "name": "AirTag 1個入り",
+          "category": "タブレットアクセサリ",
+          "series": "AirTag",
+          "specBadges": [],
+          "summary_specs": "AirTag / 64GB / Wi‑Fi / M1 / 1個入り"
+        },
+        {
+          "id": "airtag-4pack",
+          "name": "AirTag 4個入り",
+          "category": "タブレットアクセサリ",
+          "series": "AirTag",
+          "specBadges": [],
+          "summary_specs": "AirTag / 64GB / Wi‑Fi / M1 / 4個入り"
+        },
+        {
+          "id": "apple-pencil-pro",
+          "name": "Apple Pencil Pro",
+          "category": "タブレットアクセサリ",
+          "series": "Apple Pencil Pro",
+          "specBadges": [],
+          "summary_specs": "Apple Pencil Pro / 64GB / Bluetooth/磁気接続 / M1 / MX2D3ZA/A"
+        },
+        {
+          "id": "apple-pencil-usbc",
+          "name": "Apple Pencil USB-C",
+          "category": "タブレットアクセサリ",
+          "series": "Apple Pencil USB-C",
+          "specBadges": [],
+          "summary_specs": "Apple Pencil USB-C / 64GB / Bluetooth/磁気接続 / M1 / MUWA3ZA/A"
+        }
+      ]
+    },
+    {
+      "category": "パソコン",
+      "count": 4600,
+      "topItems": [
+        {
+          "id": "rog-ally-x-ryzen-z1-extreme-24-1tb-black",
+          "name": "ASUS ROG Ally X Ryzen Z1 Extreme 24GB 1TB black",
+          "category": "パソコン",
+          "series": "ASUS ROG Ally X",
+          "specBadges": [],
+          "summary_specs": "ASUS ROG Ally X / 1TB / Wi‑Fi / Ryzen Z1 Extreme / 24GB / black"
+        },
+        {
+          "id": "rog-ally-x-ryzen-z1-extreme-24-1tb-black-jis",
+          "name": "ASUS ROG Ally X Ryzen Z1 Extreme 24GB 1TB black JISキーボード",
+          "category": "パソコン",
+          "series": "ASUS ROG Ally X",
+          "specBadges": [],
+          "summary_specs": "ASUS ROG Ally X / 1TB / Wi‑Fi / Ryzen Z1 Extreme / 24GB / black / JISキーボード"
+        },
+        {
+          "id": "rog-ally-x-ryzen-z1-extreme-24-1tb-black-us",
+          "name": "ASUS ROG Ally X Ryzen Z1 Extreme 24GB 1TB black USキーボード",
+          "category": "パソコン",
+          "series": "ASUS ROG Ally X",
+          "specBadges": [],
+          "summary_specs": "ASUS ROG Ally X / 1TB / Wi‑Fi / Ryzen Z1 Extreme / 24GB / black / USキーボード"
+        },
+        {
+          "id": "rog-ally-x-ryzen-z1-extreme-24-2tb-black",
+          "name": "ASUS ROG Ally X Ryzen Z1 Extreme 24GB 2TB black",
+          "category": "パソコン",
+          "series": "ASUS ROG Ally X",
+          "specBadges": [],
+          "summary_specs": "ASUS ROG Ally X / 2TB / Wi‑Fi / Ryzen Z1 Extreme / 24GB / black"
+        }
+      ]
+    },
+    {
+      "category": "ヘルスケア",
+      "count": 192,
+      "topItems": [
+        {
+          "id": "health-omron-body-composition-black-premium-case-set-2021",
+          "name": "Omron body-composition black premium case-set 2021",
+          "category": "ヘルスケア",
+          "series": "Omron ヘルスケア",
+          "specBadges": [],
+          "summary_specs": "2021 / USB-C / premium case-set / body-composition / black"
+        },
+        {
+          "id": "health-omron-body-composition-black-premium-case-set-2022",
+          "name": "Omron body-composition black premium case-set 2022",
+          "category": "ヘルスケア",
+          "series": "Omron ヘルスケア",
+          "specBadges": [],
+          "summary_specs": "2022 / USB-C / premium case-set / body-composition / black"
+        },
+        {
+          "id": "health-omron-body-composition-black-premium-case-set-2023",
+          "name": "Omron body-composition black premium case-set 2023",
+          "category": "ヘルスケア",
+          "series": "Omron ヘルスケア",
+          "specBadges": [],
+          "summary_specs": "2023 / USB-C / premium case-set / body-composition / black"
+        },
+        {
+          "id": "health-omron-body-composition-black-premium-case-set-2024",
+          "name": "Omron body-composition black premium case-set 2024",
+          "category": "ヘルスケア",
+          "series": "Omron ヘルスケア",
+          "specBadges": [],
+          "summary_specs": "2024 / USB-C / premium case-set / body-composition / black"
+        }
+      ]
+    },
+    {
+      "category": "小型家電",
+      "count": 268,
+      "topItems": [
+        {
+          "id": "anker-powerbank-737-24000-black-cable-set",
+          "name": "Anker モバイルバッテリー 737-24000 black cable-set",
+          "category": "小型家電",
+          "series": "Anker モバイルバッテリー",
+          "specBadges": [],
+          "summary_specs": "Anker モバイルバッテリー / USB-C / cable-set / 737-24000 / black"
+        },
+        {
+          "id": "anker-powerbank-737-24000-black-main-unit",
+          "name": "Anker モバイルバッテリー 737-24000 black main-unit",
+          "category": "小型家電",
+          "series": "Anker モバイルバッテリー",
+          "specBadges": [],
+          "summary_specs": "Anker モバイルバッテリー / USB-C / main-unit / 737-24000 / black"
+        },
+        {
+          "id": "anker-powerbank-737-24000-blue-cable-set",
+          "name": "Anker モバイルバッテリー 737-24000 blue cable-set",
+          "category": "小型家電",
+          "series": "Anker モバイルバッテリー",
+          "specBadges": [],
+          "summary_specs": "Anker モバイルバッテリー / USB-C / cable-set / 737-24000 / blue"
+        },
+        {
+          "id": "anker-powerbank-737-24000-blue-main-unit",
+          "name": "Anker モバイルバッテリー 737-24000 blue main-unit",
+          "category": "小型家電",
+          "series": "Anker モバイルバッテリー",
+          "specBadges": [],
+          "summary_specs": "Anker モバイルバッテリー / USB-C / main-unit / 737-24000 / blue"
+        }
+      ]
+    },
+    {
+      "category": "生活家電",
+      "count": 662,
+      "topItems": [
+        {
+          "id": "dyson-v10-absolutepro-black-complete",
+          "name": "Dyson Cyclone V10 AbsolutePro black complete",
+          "category": "生活家電",
+          "series": "Dyson Cyclone V10",
+          "specBadges": [],
+          "summary_specs": "Dyson Cyclone V10 / black / complete / AbsolutePro"
+        },
+        {
+          "id": "dyson-v10-absolutepro-black-extra-battery",
+          "name": "Dyson Cyclone V10 AbsolutePro black extra-battery",
+          "category": "生活家電",
+          "series": "Dyson Cyclone V10",
+          "specBadges": [],
+          "summary_specs": "Dyson Cyclone V10 / black / extra-battery / AbsolutePro"
+        },
+        {
+          "id": "dyson-v10-absolutepro-black-standard",
+          "name": "Dyson Cyclone V10 AbsolutePro black standard",
+          "category": "生活家電",
+          "series": "Dyson Cyclone V10",
+          "specBadges": [],
+          "summary_specs": "Dyson Cyclone V10 / black / standard / AbsolutePro"
+        },
+        {
+          "id": "dyson-v10-absolutepro-copper-complete",
+          "name": "Dyson Cyclone V10 AbsolutePro copper complete",
+          "category": "生活家電",
+          "series": "Dyson Cyclone V10",
+          "specBadges": [],
+          "summary_specs": "Dyson Cyclone V10 / copper / complete / AbsolutePro"
+        }
+      ]
+    },
+    {
+      "category": "美容家電",
+      "count": 354,
+      "topItems": [
+        {
+          "id": "panasonic-lamshdash-3-blade-black-main-unit",
+          "name": "Panasonic ラムダッシュ 3-blade black main-unit",
+          "category": "美容家電",
+          "series": "Panasonic ラムダッシュ",
+          "specBadges": [],
+          "summary_specs": "Panasonic ラムダッシュ / USB-C / main-unit / 3-blade / black"
+        },
+        {
+          "id": "panasonic-lamshdash-3-blade-black-travel-set",
+          "name": "Panasonic ラムダッシュ 3-blade black travel-set",
+          "category": "美容家電",
+          "series": "Panasonic ラムダッシュ",
+          "specBadges": [],
+          "summary_specs": "Panasonic ラムダッシュ / USB-C / travel-set / 3-blade / black"
+        },
+        {
+          "id": "panasonic-lamshdash-3-blade-black-with-cleaner",
+          "name": "Panasonic ラムダッシュ 3-blade black with-cleaner",
+          "category": "美容家電",
+          "series": "Panasonic ラムダッシュ",
+          "specBadges": [],
+          "summary_specs": "Panasonic ラムダッシュ / USB-C / with-cleaner / 3-blade / black"
+        },
+        {
+          "id": "panasonic-lamshdash-3-blade-silver-main-unit",
+          "name": "Panasonic ラムダッシュ 3-blade silver main-unit",
+          "category": "美容家電",
+          "series": "Panasonic ラムダッシュ",
+          "specBadges": [],
+          "summary_specs": "Panasonic ラムダッシュ / USB-C / main-unit / 3-blade / silver"
         }
       ]
     }
