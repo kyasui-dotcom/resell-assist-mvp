@@ -1185,7 +1185,7 @@ for (const base of headphonesLines) {
     if (!colorSlug) continue;
     const id = `${base.id}-${colorSlug}`;
     if (existingProductMap.has(id)) continue;
-    const product = cloneProduct(base.baseId, { id, category: base.category, series: base.series, name: `${base.series} ${color}`, aliases: [`${base.series.toLowerCase()} ${color}`, ...base.keywords], searchTokens: [base.brand.toLowerCase(), base.model.toLowerCase(), color, ...base.keywords], specs: { generation: base.series, connectivity: 'Bluetooth', edition: base.brand, color }, market: buildMarket({ yahoo: [Math.round(base.marketBase * 0.86), Math.round(base.marketBase * 1.02)], rakuma: [Math.round(base.marketBase * 0.8), Math.round(base.marketBase * 0.96)], buyback: [Math.round(base.marketBase * 0.5), Math.round(base.marketBase * 0.66)], shipping: 650 }), descriptionHints: ['カラーと型番を明記', 'イヤーパッド・ケース有無を記載', 'バッテリー持ちを補足'], titleKeywords: [base.brand, color, '動作確認済み'] });
+    const product = cloneProduct(base.baseId, { id, articleCanonicalProductId: base.id, category: base.category, series: base.series, name: `${base.series} ${color}`, aliases: [`${base.series.toLowerCase()} ${color}`, ...base.keywords], searchTokens: [base.brand.toLowerCase(), base.model.toLowerCase(), color, ...base.keywords], specs: { generation: base.series, connectivity: 'Bluetooth', edition: base.brand, color }, market: buildMarket({ yahoo: [Math.round(base.marketBase * 0.86), Math.round(base.marketBase * 1.02)], rakuma: [Math.round(base.marketBase * 0.8), Math.round(base.marketBase * 0.96)], buyback: [Math.round(base.marketBase * 0.5), Math.round(base.marketBase * 0.66)], shipping: 650 }), descriptionHints: ['カラーと型番を明記', 'イヤーパッド・ケース有無を記載', 'バッテリー持ちを補足'], titleKeywords: [base.brand, color, '動作確認済み'] });
     const snapshot = cloneSnapshot(base.snapshotBase, { id, category: base.snapshotCategory, brand: base.brand, series: base.series, displayName: `${base.series} ${color}`, canonicalModel: `${base.model}-${colorSlug}`, makerModel: base.model, storage: null, connectivity: 'Bluetooth', color, searchKeywords: [base.series.toLowerCase(), color, base.model.toLowerCase(), ...base.keywords], excludeKeywords: ['箱のみ', 'ケースのみ', 'ジャンク'], requiredKeywords: base.keywords.slice(0,1), preferredKeywords: [base.model.toLowerCase(), color] });
     addProduct(product, snapshot);
   }
@@ -1216,14 +1216,17 @@ const iphoneColorMap = {
 for (const line of iphoneLines) {
   const band = iphonePriceBands[line.key];
   for (const storage of line.storage) {
-    for (const color of (iphoneColorMap[line.key] ?? [])) {
+    const colors = iphoneColorMap[line.key] ?? [];
+    const storageSlug = storage.toLowerCase().replace('gb', '').replace('tb', 'tb');
+    const representativeId = colors[0] ? `${line.slug}-${storageSlug}-${colors[0]}` : null;
+    for (const color of colors) {
       const stepIndex = storageOrder.indexOf(storage);
-      const storageSlug = storage.toLowerCase().replace('gb', '').replace('tb', 'tb');
       const id = `${line.slug}-${storageSlug}-${color}`;
       if (existingProductMap.has(id)) continue;
       const basePrice = band.base + band.step * stepIndex + (color.includes('titanium') ? 2000 : 0);
       const product = cloneProduct(line.baseId, {
         id,
+        ...(representativeId && id !== representativeId ? { articleCanonicalProductId: representativeId } : {}),
         series: line.series,
         name: `${line.nameBase} ${storage} ${color} SIMフリー`,
         aliases: [`${line.slug} ${storageSlug} ${color}`, `${line.nameBase.toLowerCase()} ${storage.toLowerCase()} ${color}`],

@@ -631,9 +631,42 @@ async function main() {
       .map((value) => value.trim())
       .filter(Boolean)
   );
-  const targetProducts = products
+  const filteredProducts = products
     .filter((product) => product.market)
-    .filter((product) => categoryFilter.size === 0 || categoryFilter.has(product.category))
+    .filter((product) => categoryFilter.size === 0 || categoryFilter.has(product.category));
+
+  // Group products by spec key (series + storage + connectivity + chip + memory) — color違いは同一群
+  // 群の先頭を代表とし、それ以外は articleCanonicalProductId を代表に向けて記事生成skip
+  // 群を「同一機種・同一仕様(color以外)」で定義。色違いだけ別variantを同一群にまとめて代表のみ記事化
+  const groupKey = (p) => [
+    p.series ?? '',
+    p.specs?.storage ?? '',
+    p.specs?.connectivity ?? '',
+    p.specs?.chip ?? '',
+    p.specs?.memory ?? '',
+    p.specs?.size ?? '',
+    p.specs?.edition ?? '',
+    p.specs?.generation ?? '',
+    p.specs?.model ?? ''
+  ].join('|');
+
+  const groupRepresentative = new Map();
+  for (const product of filteredProducts) {
+    const key = groupKey(product);
+    if (!groupRepresentative.has(key)) groupRepresentative.set(key, product.id);
+  }
+
+  const productsForArticles = filteredProducts.filter((product) => {
+    // 明示的なcanonicalProductIdが付いていればskip
+    if (product.articleCanonicalProductId && product.articleCanonicalProductId !== product.id) return false;
+    // 群の代表でなければskip (color違いの2件目以降)
+    const rep = groupRepresentative.get(groupKey(product));
+    return !rep || rep === product.id;
+  });
+
+  const skippedCount = filteredProducts.length - productsForArticles.length;
+
+  const targetProducts = productsForArticles
     .slice(0, Number.isFinite(articleProductLimit) && articleProductLimit > 0 ? articleProductLimit : undefined);
 
   await fs.rm(outDir, { recursive: true, force: true });
@@ -647,6 +680,9 @@ async function main() {
       articles.push(article);
       await fs.writeFile(path.join(outDir, `${article.slug}.html`), article.html, 'utf8');
     }
+  }
+  if (skippedCount > 0) {
+    console.log(`Skipped ${skippedCount} color-variant products (canonicalized to group representative).`);
   }
 
   await fs.writeFile(path.join(outDir, 'index.html'), buildHubPage(articles), 'utf8');
