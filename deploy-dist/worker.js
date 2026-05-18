@@ -1,4 +1,5 @@
 import { buildSearchIndex, collectSpecBadges, computeMarkets, searchProducts } from './lib/core.js';
+import { articleRedirects } from './lib/article-redirects.js';
 
 const SEARCH_CACHE_TTL_SECONDS = 60 * 15;
 const CATEGORY_CACHE_TTL_SECONDS = 60 * 30;
@@ -390,6 +391,19 @@ export default {
       const product = await getProductById(env, id);
       if (!product) return renderProductNotFoundPage(id);
       return renderDynamicProductPage(product);
+    }
+
+    // 色違いでdedup されて消えた旧記事URL → 代表色のURLへ301
+    if (url.pathname.startsWith('/articles/')) {
+      const slugPart = url.pathname.replace(/^\/articles\//, '').replace(/\.html$/, '').replace(/\/$/, '');
+      const canonicalSlug = slugPart ? articleRedirects[slugPart] : null;
+      if (canonicalSlug) {
+        const target = new URL(`/articles/${canonicalSlug}`, url.origin);
+        return new Response(null, {
+          status: 301,
+          headers: { Location: target.toString(), 'Cache-Control': 'public, max-age=86400' }
+        });
+      }
     }
 
     return env.ASSETS.fetch(request);
