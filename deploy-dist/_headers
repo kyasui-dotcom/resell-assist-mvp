@@ -1,0 +1,9 @@
+# Cloudflare Workers Static Assets - custom HTTP headers
+# https://developers.cloudflare.com/workers/static-assets/headers/
+# Worker (worker.js) が生成するレスポンスには適用されない点に注意。worker側は worker.js の withSecurityHeaders で同じヘッダを付与する。
+
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
