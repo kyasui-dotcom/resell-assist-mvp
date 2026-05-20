@@ -12,6 +12,7 @@ const STATIC_FILES = [
   'robots.txt',
   'og-image.svg',
   'og-image.png',
+  '_headers',
   'google586bfb8e8307adb8.html'
 ];
 

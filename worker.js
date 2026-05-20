@@ -230,11 +230,22 @@ function renderDynamicProductPage(product) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${escapeHtml(title)}</title>
     <meta name="description" content="${escapeHtml(description)}" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="${canonicalUrl}" />
     <meta property="og:title" content="${escapeHtml(title)}" />
     <meta property="og:description" content="${escapeHtml(description)}" />
-    <meta property="og:type" content="article" />
+    <meta property="og:type" content="product" />
     <meta property="og:url" content="${canonicalUrl}" />
-    <link rel="canonical" href="${canonicalUrl}" />
+    <meta property="og:image" content="https://kaitorihikaku.net/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="${escapeHtml(product.name)}の買取価格比較" />
+    <meta property="og:site_name" content="買取比較.net" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${escapeHtml(title)}" />
+    <meta name="twitter:description" content="${escapeHtml(description)}" />
+    <meta name="twitter:image" content="https://kaitorihikaku.net/og-image.png" />
+    <meta name="twitter:image:alt" content="${escapeHtml(product.name)}の買取価格比較" />
     <script type="application/ld+json">${JSON.stringify(breadcrumbJson)}</script>
     <script type="application/ld+json">${JSON.stringify(productJson)}</script>
     <link rel="stylesheet" href="/styles.css" />
@@ -363,11 +374,31 @@ async function getCategorySummary(env) {
   };
 }
 
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
+// 全レスポンスに付与する SEO/Security ヘッダ
+const SECURITY_HEADERS = {
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), interest-cohort=()'
+};
 
-    if (url.pathname === '/api/search') {
+function withSecurityHeaders(response) {
+  // 既存ヘッダを保ちつつ追加（既存があれば上書きしない）
+  const headers = new Headers(response.headers);
+  for (const [k, v] of Object.entries(SECURITY_HEADERS)) {
+    if (!headers.has(k)) headers.set(k, v);
+  }
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers
+  });
+}
+
+async function handleRequest(request, env) {
+  const url = new URL(request.url);
+
+  if (url.pathname === '/api/search') {
       const query = url.searchParams.get('q') || '';
       const limit = Math.min(10, Math.max(1, Number(url.searchParams.get('limit') || 5)));
       return json(await searchCatalog(env, query, limit), { cacheControl: 'public, max-age=60, s-maxage=300' });
@@ -420,5 +451,11 @@ export default {
     }
 
     return env.ASSETS.fetch(request);
+}
+
+export default {
+  async fetch(request, env) {
+    const response = await handleRequest(request, env);
+    return withSecurityHeaders(response);
   }
 };
