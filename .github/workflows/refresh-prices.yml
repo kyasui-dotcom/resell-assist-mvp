@@ -47,6 +47,7 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          wranglerVersion: '4.92.0'   # wrangler.jsonc を確実に読める版に固定
           command: deploy
 
       - name: Commit refreshed data back to repo
