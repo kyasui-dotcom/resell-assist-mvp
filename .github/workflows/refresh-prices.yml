@@ -1,0 +1,62 @@
+name: Refresh prices & deploy
+
+on:
+  schedule:
+    - cron: '0 18 * * *'  # 毎日 03:00 JST (UTC 18:00) - 取引量少ない時間帯
+  workflow_dispatch:       # 手動実行も可能
+
+permissions:
+  contents: write          # output/ や sitemaps/ を commit するため
+
+concurrency:
+  group: refresh-prices    # 同時実行を防ぐ
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch price snapshots (Yahoo / Rakuma / Janpara)
+        run: npm run snapshot
+
+      - name: Update price history
+        run: npm run history
+
+      - name: Build SEO pages (categories / articles / sitemaps)
+        run: npm run seo:build
+
+      - name: Build deploy-dist
+        run: npm run build:deploy
+
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: deploy
+
+      - name: Commit refreshed data back to repo
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add output/ data/article-manifest.json lib/article-redirects.js sitemaps/ sitemap.xml deploy-dist/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "chore: daily price refresh ($(date -u +'%Y-%m-%d'))"
+          git push
