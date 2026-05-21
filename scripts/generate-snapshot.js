@@ -8,8 +8,17 @@ import { fetchYahooClosedSearch, summarizeYahooDebug } from '../lib/sources/yaho
 import { fetchRakumaSearch } from '../lib/sources/rakuma-search.js';
 
 const root = new URL('../', import.meta.url);
-const products = JSON.parse(await fs.readFile(new URL('../data/products-snapshot.json', import.meta.url), 'utf8'));
+const allProducts = JSON.parse(await fs.readFile(new URL('../data/products-snapshot.json', import.meta.url), 'utf8'));
 const rules = JSON.parse(await fs.readFile(new URL('../data/noise-rules.json', import.meta.url), 'utf8'));
+
+// SNAPSHOT_PRODUCT_IDS で指定があれば対象を絞る (カンマ区切り)。
+// 未指定なら全件 (= 従来挙動)。live fetch 時は base 22商品のみ指定するのが現実的。
+const targetIdsEnv = process.env.SNAPSHOT_PRODUCT_IDS?.trim();
+const targetIds = targetIdsEnv ? new Set(targetIdsEnv.split(',').map((s) => s.trim()).filter(Boolean)) : null;
+const products = targetIds ? allProducts.filter((p) => targetIds.has(p.id)) : allProducts;
+if (targetIds) {
+  console.log(`SNAPSHOT_PRODUCT_IDS フィルタ適用: ${products.length}/${allProducts.length} products`);
+}
 
 async function normalizeAndClassify(sourceItems) {
   return sourceItems.map((item) => {
@@ -38,10 +47,18 @@ async function normalizeAndClassify(sourceItems) {
 }
 
 const allSourceItems = [];
-for (const product of products) {
+const startedAt = Date.now();
+for (let i = 0; i < products.length; i += 1) {
+  const product = products[i];
+  const stepStart = Date.now();
   allSourceItems.push(...await fetchJanparaBuyback(product));
   allSourceItems.push(...await fetchYahooClosedSearch(product));
   allSourceItems.push(...await fetchRakumaSearch(product));
+  if ((i + 1) % 10 === 0 || i === products.length - 1) {
+    const elapsed = Math.round((Date.now() - startedAt) / 1000);
+    const stepMs = Date.now() - stepStart;
+    console.log(`  [${i + 1}/${products.length}] ${product.id} (${stepMs}ms / total ${elapsed}s)`);
+  }
 }
 
 const normalizedItems = await normalizeAndClassify(allSourceItems);

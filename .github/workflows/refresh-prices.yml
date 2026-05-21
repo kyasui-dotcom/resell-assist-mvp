@@ -32,6 +32,9 @@ jobs:
         run: npm ci
 
       - name: Fetch price snapshots (Yahoo / Rakuma / Janpara)
+        env:
+          RESALE_USE_LIVE_FETCH: '1'         # 実 HTTP fetch を有効化（無いと fixture のみで count:0）
+          SNAPSHOT_PRODUCT_IDS: 'iphone13-128,iphone13-256,iphone13mini-128,airpodspro2-lightning,airpodspro2-usbc,switch-oled-white,switch-oled-neon,ipad-air5-64-wifi,ipad-air5-256-wifi,ipad-air5-64-cellular,ipad-air5-256-cellular,ps5-slim-standard,ps5-slim-digital,apple-watch-se2-40-gps,apple-watch-se2-44-gps,apple-watch-se2-44-cellular,iphone14-128,airpods4-anc,ipad-mini6-64-wifi,switch-lite-yellow,ps5-slim-digital-fortnite,apple-watch-s9-45-gps'
         run: npm run snapshot
 
       - name: Update price history
