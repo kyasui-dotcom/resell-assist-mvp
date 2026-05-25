@@ -13,6 +13,7 @@ const STATIC_FILES = [
   'og-image.svg',
   'og-image.png',
   '_headers',
+  '_redirects',
   'google586bfb8e8307adb8.html'
 ];
 

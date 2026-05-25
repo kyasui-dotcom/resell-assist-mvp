@@ -1,0 +1,10 @@
+# Cloudflare Workers Static Assets redirects
+# .html URL → 拡張子無し 301 化 (Search Console 「ページにリダイレクトがあります」対策)
+# 注: build-deploy-dist.js が deploy-dist/_redirects にコピーする
+# 注: /products/*.html は worker.js が動的レンダリングするので含めない
+
+/articles/index.html       /articles/         301
+/categories/index.html     /categories/       301
+/index.html                /                  301
+/articles/*.html           /articles/:splat   301
+/categories/*.html         /categories/:splat 301

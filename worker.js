@@ -395,67 +395,75 @@ function withSecurityHeaders(response) {
   });
 }
 
+function safeDecode(value) {
+  try { return decodeURIComponent(value); } catch { return null; }
+}
+
 async function handleRequest(request, env) {
   const url = new URL(request.url);
 
   if (url.pathname === '/api/search') {
-      const query = url.searchParams.get('q') || '';
-      const limit = Math.min(10, Math.max(1, Number(url.searchParams.get('limit') || 5)));
-      return json(await searchCatalog(env, query, limit), { cacheControl: 'public, max-age=60, s-maxage=300' });
-    }
+    const query = url.searchParams.get('q') || '';
+    const limit = Math.min(10, Math.max(1, Number(url.searchParams.get('limit') || 5)));
+    return json(await searchCatalog(env, query, limit), { cacheControl: 'public, max-age=60, s-maxage=300' });
+  }
 
-    if (url.pathname === '/api/categories/summary') {
-      return json(await getCategorySummary(env), { cacheControl: 'public, max-age=300, s-maxage=1800' });
-    }
+  if (url.pathname === '/api/categories/summary') {
+    return json(await getCategorySummary(env), { cacheControl: 'public, max-age=300, s-maxage=1800' });
+  }
 
-    if (url.pathname.startsWith('/api/products/')) {
-      const id = decodeURIComponent(url.pathname.replace('/api/products/', ''));
-      const product = await getProductById(env, id);
-      if (!product) {
-        return json({ error: 'not_found' }, { status: 404, cacheControl: 'public, max-age=60' });
-      }
-      return json({ product }, { cacheControl: 'public, max-age=300, s-maxage=1800' });
+  if (url.pathname.startsWith('/api/products/')) {
+    const id = safeDecode(url.pathname.replace('/api/products/', ''));
+    if (!id) return json({ error: 'bad_request' }, { status: 400, cacheControl: 'public, max-age=60' });
+    const product = await getProductById(env, id);
+    if (!product) {
+      return json({ error: 'not_found' }, { status: 404, cacheControl: 'public, max-age=60' });
     }
+    return json({ product }, { cacheControl: 'public, max-age=300, s-maxage=1800' });
+  }
 
-    if (url.pathname.startsWith('/products/') && url.pathname.endsWith('.html')) {
-      const id = decodeURIComponent(url.pathname.replace('/products/', '').replace(/\.html$/, ''));
-      const product = await getProductById(env, id);
-      if (!product) return renderProductNotFoundPage(id);
-      return renderDynamicProductPage(product);
-    }
+  if (url.pathname.startsWith('/products/') && url.pathname.endsWith('.html')) {
+    const id = safeDecode(url.pathname.replace('/products/', '').replace(/\.html$/, ''));
+    if (!id) return renderProductNotFoundPage('invalid');
+    const product = await getProductById(env, id);
+    if (!product) return renderProductNotFoundPage(id);
+    return renderDynamicProductPage(product);
+  }
 
-    // 色違いでdedup されて消えた旧記事URL → 代表色のURLへ301
-    if (url.pathname.startsWith('/articles/')) {
-      const slugPart = url.pathname.replace(/^\/articles\//, '').replace(/\.html$/, '').replace(/\/$/, '');
-      const canonicalSlug = slugPart ? articleRedirects[slugPart] : null;
-      if (canonicalSlug) {
-        const target = new URL(`/articles/${canonicalSlug}`, url.origin);
-        return new Response(null, {
-          status: 301,
-          headers: { Location: target.toString(), 'Cache-Control': 'public, max-age=86400' }
-        });
-      }
-    }
-
-    // HTML拡張子の 301 正規化 (Cloudflare Assets の default 307 を 301 に上書き)
-    // 対象: /articles/foo.html, /categories/foo.html, /articles/index.html, /index.html など
-    // 除外: /products/foo.html (worker.js が上で動的レンダリング 200 を返す)
-    if (url.pathname.endsWith('.html') && !url.pathname.startsWith('/products/')) {
-      const normalized = url.pathname.endsWith('/index.html')
-        ? url.pathname.slice(0, -'index.html'.length)
-        : url.pathname.slice(0, -'.html'.length);
+  // 色違いでdedup されて消えた旧記事URL → 代表色のURLへ301
+  if (url.pathname.startsWith('/articles/')) {
+    const slugPart = url.pathname.replace(/^\/articles\//, '').replace(/\.html$/, '').replace(/\/$/, '');
+    const canonicalSlug = slugPart ? articleRedirects[slugPart] : null;
+    if (canonicalSlug) {
       return new Response(null, {
         status: 301,
-        headers: { Location: normalized + url.search, 'Cache-Control': 'public, max-age=86400' }
+        headers: { Location: `/articles/${canonicalSlug}`, 'Cache-Control': 'public, max-age=86400' }
       });
     }
+  }
 
+  // 静的アセットへ委譲。env.ASSETS が未バインドの環境ではフォールバック。
+  // (※ .html → 拡張子無し 301 は deploy-dist/_redirects に委譲)
+  if (env.ASSETS && typeof env.ASSETS.fetch === 'function') {
     return env.ASSETS.fetch(request);
+  }
+  return new Response('Not Found', { status: 404, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 }
 
 export default {
   async fetch(request, env) {
-    const response = await handleRequest(request, env);
-    return withSecurityHeaders(response);
+    try {
+      const response = await handleRequest(request, env);
+      return withSecurityHeaders(response);
+    } catch (err) {
+      // failsafe: handleRequest 内で想定外の throw が出ても 500 を返してログに残す
+      console.error('worker fetch error:', err?.stack || String(err));
+      return withSecurityHeaders(
+        new Response('Internal Server Error', {
+          status: 500,
+          headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+        })
+      );
+    }
   }
 };
