@@ -249,7 +249,7 @@ function renderDynamicProductPage(product) {
     <script type="application/ld+json">${JSON.stringify(breadcrumbJson)}</script>
     <script type="application/ld+json">${JSON.stringify(productJson)}</script>
     <link rel="stylesheet" href="/styles.css" />
-  </head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9351947872274309" crossorigin="anonymous"></script></head>
   <body>
     <div class="app stack">
       <nav class="pageNav sub"><a href="/">トップ</a> › <a href="${categoryHref(product.category)}">${escapeHtml(product.category)}</a> › ${escapeHtml(product.name)}</nav>
@@ -288,7 +288,7 @@ function renderProductNotFoundPage(id) {
     <title>商品データ準備中 | 買取比較.net</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="stylesheet" href="/styles.css" />
-  </head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9351947872274309" crossorigin="anonymous"></script></head>
   <body>
     <div class="app stack">
       <section class="hero stack">

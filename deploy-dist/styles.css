@@ -2801,7 +2801,7 @@ body {
   background: radial-gradient(circle, rgba(59,130,246,.14), rgba(59,130,246,0));
   pointer-events: none;
 }
-.hero h1 { font-size: clamp(2rem, 4vw, 3rem); max-width: 12ch; }
+.hero h1 { font-size: clamp(2rem, 4vw, 3rem); max-width: 28ch; }
 .sub { line-height: 1.68; }
 .sectionTitle { letter-spacing: -0.02em; }
 .card {

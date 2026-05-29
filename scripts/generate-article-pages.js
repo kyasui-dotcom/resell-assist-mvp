@@ -396,7 +396,7 @@ function buildArticle(product, rawSnapshot, intent, products, snapshotMap, histo
     <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'Article', headline: title, description, inLanguage: 'ja', url: canonical, dateModified: modifiedAt, mainEntityOfPage: canonical, about: [product.name, product.category, intent.label] })}</script>
     <script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>
     <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
-  </head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9351947872274309" crossorigin="anonymous"></script></head>
   <body>
     <div class="app stack">
       <nav class="pageNav crumbs sub">
@@ -587,7 +587,7 @@ function buildHubPage(articles) {
     <script type="application/ld+json">${collectionStructuredData}</script>
     <script type="application/ld+json">${breadcrumbStructuredData}</script>
     <link rel="stylesheet" href="../styles.css" />
-  </head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9351947872274309" crossorigin="anonymous"></script></head>
   <body>
     <div class="app stack">
       <nav class="pageNav crumbs sub" aria-label="パンくず">
