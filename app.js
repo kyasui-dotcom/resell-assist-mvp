@@ -3295,30 +3295,6 @@ function buildRelatedGuideCtaLabel(tag = '') {
   return 'ガイドを見る';
 }
 
-function buildRelatedGuidePreviewLabel(tag) {
-  if (tag === '販路比較') return 'まず見る: 買取店とフリマの差';
-  if (tag === '高く売るコツ') return 'まず見る: 減額されやすい準備項目';
-  if (tag === '売り時') return 'まず見る: 値下がり前に動く目安';
-  if (tag === 'FAQ') return 'まず見る: 初期化と付属品の確認';
-  return 'まず見る: 売る前に確認したいポイント';
-}
-
-function buildRelatedGuideOutcomeLabel(tag) {
-  if (tag === '販路比較') return '読み終わると: 向いている売り方を決めやすい';
-  if (tag === '高く売るコツ') return '読み終わると: 先に整える準備の順番が見える';
-  if (tag === '売り時') return '読み終わると: 今動くか待つか判断しやすい';
-  if (tag === 'FAQ') return '読み終わると: 売る前の不安をまとめて減らしやすい';
-  return '読み終わると: 次に確認するポイントを決めやすい';
-}
-
-function buildRelatedGuideWhenLabel(tag) {
-  if (tag === '販路比較') return 'こんなとき: 手取りと手間のどちらを優先するか迷うとき';
-  if (tag === '高く売るコツ') return 'こんなとき: 少しでも減額を避けて上積みを狙いたいとき';
-  if (tag === '売り時') return 'こんなとき: 今売るか、少し待つか判断を急ぎたいとき';
-  if (tag === 'FAQ') return 'こんなとき: 初期化や付属品など売る前の不安を先に消したいとき';
-  return 'こんなとき: 次に何から確認するか迷うとき';
-}
-
 function buildRelatedGuideEffortLabel(tag) {
   if (tag === '販路比較') return '約4分 ・ 全9項目';
   if (tag === '高く売るコツ') return '約3分 ・ 全9項目';
@@ -3342,9 +3318,6 @@ function buildRelatedGuideLinks(product, { recommendedTag = '' } = {}) {
       label: `${product.name} ${guide.title}`,
       note: guide.note,
       effortLabel: buildRelatedGuideEffortLabel(guide.tag),
-      previewLabel: buildRelatedGuidePreviewLabel(guide.tag),
-      whenLabel: buildRelatedGuideWhenLabel(guide.tag),
-      outcomeLabel: buildRelatedGuideOutcomeLabel(guide.tag),
       ctaLabel: buildRelatedGuideCtaLabel(guide.tag),
       isRecommended: guide.tag === recommendedTag,
       sortWeight: guide.tag === recommendedTag ? -1 : index
@@ -3757,9 +3730,6 @@ function renderProduct(product, { historyMode = 'replace' } = {}) {
       <strong>${escapeHtml(item.label)}</strong>
       <span class="sub small">${escapeHtml(item.note)}</span>
       <span class="guideCardEffort">${escapeHtml(item.effortLabel)}</span>
-      <span class="guideCardPreview">${escapeHtml(item.previewLabel)}</span>
-      <span class="guideCardWhen">${escapeHtml(item.whenLabel)}</span>
-      <span class="guideCardOutcome">${escapeHtml(item.outcomeLabel)}</span>
       <span class="guideCardCta">${escapeHtml(item.ctaLabel)}</span>
     </a>
   `).join('');
