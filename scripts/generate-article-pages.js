@@ -448,6 +448,12 @@ function buildArticle(product, rawSnapshot, intent, products, snapshotMap, histo
             <ul>${intentSections.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
           </section>
 
+          <div class="adUnit" aria-label="スポンサーリンク">
+            <span class="adUnitLabel">スポンサーリンク</span>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9351947872274309" data-ad-slot="5825120432" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
+
           <section class="card stack">
             <div class="sectionHead"><div><p class="eyebrow">Market view</p><h2 class="sectionTitle">販路ごとの見え方</h2></div><p class="sub small">売り方別の目線差を整理</p></div>
             <div class="marketGrid">${markets.map((market) => `<div class="box"><strong>${escapeHtml(market.label)}</strong><div class="price">${yen(market.price)}</div><p class="sub">${escapeHtml(market.note)}</p></div>`).join('')}</div>
@@ -493,6 +499,12 @@ function buildArticle(product, rawSnapshot, intent, products, snapshotMap, histo
             <h2>よくある質問</h2>
             <div class="grid">${faqs.map((item) => `<div class="box"><strong>${escapeHtml(item.q)}</strong><p class="sub">${escapeHtml(item.a)}</p></div>`).join('')}</div>
           </section>
+
+          <div class="adUnit" aria-label="スポンサーリンク">
+            <span class="adUnitLabel">スポンサーリンク</span>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9351947872274309" data-ad-slot="5825120432" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
         </div>
 
         <aside class="stack sticky">
