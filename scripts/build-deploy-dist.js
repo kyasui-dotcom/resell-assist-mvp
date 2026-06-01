@@ -10,6 +10,7 @@ const STATIC_FILES = [
   'styles.css',
   'worker.js',
   'robots.txt',
+  'ads.txt',
   'og-image.svg',
   'og-image.png',
   '_headers',
