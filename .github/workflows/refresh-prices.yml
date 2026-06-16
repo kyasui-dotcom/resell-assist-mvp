@@ -46,12 +46,18 @@ jobs:
       - name: Build deploy-dist
         run: npm run build:deploy
 
-      - name: Deploy to Cloudflare Workers
+      - name: Deploy to Cloudflare Workers (kaitorihikaku.net)
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           wranglerVersion: '4.92.0'   # wrangler.jsonc を確実に読める版に固定
           command: deploy
+
+      - name: Update nedan.online D1 (kaitori_price)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node scripts/update-d1-prices.js
 
       - name: Commit refreshed data back to repo
         run: |
