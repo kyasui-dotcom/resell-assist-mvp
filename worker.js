@@ -399,8 +399,34 @@ function safeDecode(value) {
   try { return decodeURIComponent(value); } catch { return null; }
 }
 
+const NEDAN_ORIGIN = 'https://nedan.online';
+
+// kaitorihikaku.net → nedan.online 全体移設リダイレクト
+// 記事: /articles/{slug} → /articles/kaitori-{slug}
+// その他: すべて nedan.online トップへ
+function buildNedanRedirect(pathname) {
+  if (pathname.startsWith('/articles/')) {
+    const slugPart = pathname.replace(/^\/articles\//, '').replace(/\.html$/, '').replace(/\/$/, '');
+    if (slugPart && slugPart !== 'index') {
+      return `${NEDAN_ORIGIN}/articles/kaitori-${slugPart}`;
+    }
+    return `${NEDAN_ORIGIN}/`;
+  }
+  return `${NEDAN_ORIGIN}/`;
+}
+
 async function handleRequest(request, env) {
   const url = new URL(request.url);
+
+  // サイト全体を nedan.online へ 301 移設
+  // REDIRECT_TO_NEDAN=1 環境変数でON/OFF切り替え（デプロイ前にテスト可能）
+  if (env.REDIRECT_TO_NEDAN === '1') {
+    const dest = buildNedanRedirect(url.pathname);
+    return new Response(null, {
+      status: 301,
+      headers: { Location: dest, 'Cache-Control': 'public, max-age=86400' }
+    });
+  }
 
   if (url.pathname === '/api/search') {
     const query = url.searchParams.get('q') || '';
