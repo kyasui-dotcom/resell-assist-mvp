@@ -74,11 +74,10 @@ const sqlPath = path.join(root, 'output/d1-price-update.sql');
 await fs.writeFile(sqlPath, sql, 'utf8');
 console.log(`✓ Generated SQL for ${rows.length} products`);
 
-// wrangler で D1 に実行 (CLOUDFLARE_API_TOKEN は環境変数から自動読み込み)
-const DB_ID = 'c480189c-2d88-489e-acd1-934e4848996d';
-const ACCOUNT_ID = '125a7d5dea34f38a2f5fdaf5187480d4';
+// wrangler 4.x: --database-id / --account-id フラグ廃止。
+// CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID を環境変数で渡してDBを名前で指定。
 execSync(
-  `npx wrangler d1 execute nedan-jp-db --database-id ${DB_ID} --account-id ${ACCOUNT_ID} --remote --file="${sqlPath}"`,
+  `npx wrangler d1 execute nedan-jp-db --remote --file="${sqlPath}"`,
   { stdio: 'inherit', env: { ...process.env, NODE_TLS_REJECT_UNAUTHORIZED: '0' } }
 );
 console.log('✓ D1 kaitori_price updated');
