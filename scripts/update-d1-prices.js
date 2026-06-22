@@ -74,10 +74,23 @@ const sqlPath = path.join(root, 'output/d1-price-update.sql');
 await fs.writeFile(sqlPath, sql, 'utf8');
 console.log(`✓ Generated SQL for ${rows.length} products`);
 
-// wrangler 4.x: --database-id / --account-id フラグ廃止。
-// CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID を環境変数で渡してDBを名前で指定。
+// wrangler 4.x: DB名でのリスト照会 API を避けるため、database_id を含む
+// 一時 wrangler.toml を生成して --config で渡す。
+const tmpConfig = path.join(root, 'tmp-nedan-wrangler.toml');
+await fs.writeFile(tmpConfig, [
+  'name = "nedan-d1-updater"',
+  'main = "worker.js"',
+  'compatibility_date = "2026-01-01"',
+  '',
+  '[[d1_databases]]',
+  'binding = "DB"',
+  'database_name = "nedan-jp-db"',
+  'database_id = "c480189c-2d88-489e-acd1-934e4848996d"',
+].join('\n'), 'utf8');
+
 execSync(
-  `npx wrangler d1 execute nedan-jp-db --remote --file="${sqlPath}"`,
+  `npx wrangler d1 execute DB --config "${tmpConfig}" --remote --file="${sqlPath}"`,
   { stdio: 'inherit', env: { ...process.env, NODE_TLS_REJECT_UNAUTHORIZED: '0' } }
 );
+await fs.unlink(tmpConfig).catch(() => {});
 console.log('✓ D1 kaitori_price updated');
